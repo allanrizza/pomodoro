@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:mobx/mobx.dart';
 
+import 'package:vibration/vibration.dart';
+
 part 'pomodoro.store.g.dart';
 
 class PomodoroStore = _PomodoroStore with _$PomodoroStore;
@@ -35,6 +37,7 @@ abstract class _PomodoroStore with Store {
     cronometro = Timer.periodic(Duration(seconds: 1), (timer) {
       if (minutos == 0 && segundos == 0) {
         _trocarTipoIntervalo();
+        Vibration.vibrate(duration: 1000);
       } else if (segundos == 0) {
         segundos = 59;
         minutos--;
